@@ -1,0 +1,60 @@
+<div class="email-builder-section">
+    <div class="container">
+      <header class="header">
+        <h1 class="title">Email Template Builder</h1>
+        <p class="description">
+          Lorem ipsum dolor sit amet consectetur. Dis quis at consectetur
+          pellentesque nisi. Interdum euismod rhoncus consequat in suspendisse
+          tortor enim tellus fermentum.
+        </p>
+      </header>
+      <main class="main-content">
+        <div class="content-wrapper">
+          <div class="sidebar">
+            <div class="sidebar-content">
+              <nav class="menu">
+                <ul class="menu-items">
+                  <li class="menu-item">
+                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726632980689content.png" alt="Content icon" class="menu-icon" />
+                    <span class="menu-text">CONTENT</span>
+                  </li>
+                  <li class="menu-item">
+                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633080222blocks.png" alt="Blocks icon" class="menu-icon" />
+                    <span class="menu-text">BLOCKS</span>
+                  </li>
+                  <li class="menu-item">
+                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633095861body.png" alt="Body icon" class="menu-icon" />
+                    <span class="menu-text">BODY</span>
+                  </li>
+                </ul>
+              </nav>
+  
+              <div class="blocks-section">
+                <div *ngFor="let block of blocks" class="block-wrapper">
+                  <img 
+                    [src]="block.icon" 
+                    class="block-image" 
+                    pDraggable="{{block.icon}}" 
+                    (onDragStart)="onDragStart($event, block)" 
+                    draggable="true"
+                    alt="Block icon"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="preview-area">
+            <div 
+              class="preview-placeholder" 
+              (drop)="onDrop($event)" 
+              (dragover)="allowDrop($event)">
+              No content here. <br />
+              Drag content from the sidebar
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
