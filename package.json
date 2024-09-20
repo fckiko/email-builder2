@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "install": "^0.13.0",
+    "ngx-drag-drop": "^18.0.2",
     "npm": "^10.8.3",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
