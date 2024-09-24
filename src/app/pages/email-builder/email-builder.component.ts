@@ -63,7 +63,6 @@ export class EmailBuilderComponent implements OnInit {
               reader.readAsDataURL(file);
             }
           };
-  
           fileInput.click();
           break;
         case 'text':
@@ -73,7 +72,7 @@ export class EmailBuilderComponent implements OnInit {
           blockHTML = `
             <div class="block-column" style="display: flex;">
               <div contenteditable="true" class="block-column-text" style="flex: 1; padding: 5px; border: 1px solid #8752c4;">Column 1</div>
-              <div contenteditable="true" class="block-column-text" style="flex: 1; padding: 5px; border: 1px solid ;">Column 2</div>
+              <div contenteditable="true" class="block-column-text" style="flex: 1; padding: 5px; border: 1px solid #8752c4;">Column 2</div>
             </div>`;
           break;
         case 'header':
