@@ -75,15 +75,18 @@ export class EmailBuilderComponent implements OnInit {
   updateBlockStyles() {
     if (this.selectedBlock) {
       const block = this.selectedBlock.element;
-
-      block.style.fontSize = this.selectedBlock.styles.fontSize;
-      block.style.padding = this.selectedBlock.styles.padding;
+      const fontSizeValue = this.selectedBlock.styles.fontSize + 'px';
+      block.style.fontSize = fontSizeValue;
+      const paddingValue = this.selectedBlock.styles.padding + 'px';
+      block.style.padding = paddingValue;
       block.style.color = this.selectedBlock.styles.color;
       block.style.backgroundColor = this.selectedBlock.styles.backgroundColor;
     }
   }
 
-
+  closeSettings() {
+    this.selectedBlock = null; // Close the settings panel by deselecting the block
+  }
   getBlockHTML(type: string): string {
     let blockHTML = '';
     switch (type) {
