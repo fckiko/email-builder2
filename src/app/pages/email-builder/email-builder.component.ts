@@ -51,6 +51,7 @@ export class EmailBuilderComponent implements OnInit {
       this.attachClickEventsToBlocks();
     }
   }
+
   attachClickEventsToBlocks() {
     const dropArea = this.dropAreaRef.nativeElement;
     const blocks = dropArea.querySelectorAll('.block-text, .block-header, .block-button, .block-divider, .block-image');
@@ -83,7 +84,7 @@ export class EmailBuilderComponent implements OnInit {
   }
 
   closeSettings() {
-    this.selectedBlock = null; // Close the settings panel by deselecting the block
+    this.selectedBlock = null; 
   }
   getBlockHTML(type: string): string {
     let blockHTML = '';
@@ -163,7 +164,7 @@ export class EmailBuilderComponent implements OnInit {
         <title>Email Template</title>
         <style>
           body {
-            background-color: grey;
+            background-color: #F5F5F7;
             font-family: Arial, sans-serif;
           }
           .block-text {
