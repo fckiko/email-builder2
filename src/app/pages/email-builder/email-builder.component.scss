@@ -216,3 +216,22 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .generate-field{
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+  }
+  .generate-button{
+    padding: 0px 20px 0px 20px;
+    font: 500 16px Poppins, sans-serif;
+  }
+  .generate-text{
+    height: 40px;
+    width: 400px;
+    padding: 0px 8px 0px 8px;
+  }
+  .column-wrapper{
+    display: flex;
+    justify-content: space-between;
+  }

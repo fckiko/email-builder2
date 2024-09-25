@@ -48,8 +48,6 @@ export class EmailBuilderComponent implements OnInit {
       const dropArea = this.dropAreaRef.nativeElement;
       dropArea.innerHTML += blockHTML;
       this.draggedBlock = null;
-
-      // Attach click event listener to all blocks to select them
       this.attachClickEventsToBlocks();
     }
   }
@@ -94,7 +92,7 @@ export class EmailBuilderComponent implements OnInit {
         this.handleImageBlock();
         break;
       case 'text':
-        blockHTML = `<div contenteditable="true" class="block-text">Insert your text here</div>`;
+        blockHTML = `<div contenteditable="true" class="block-text" style="textsize: 16px;">Insert your text here</div>`;
         break;
       case 'column':
         blockHTML = `
@@ -104,7 +102,7 @@ export class EmailBuilderComponent implements OnInit {
           </div>`;
         break;
       case 'header':
-        blockHTML = `<h1 contenteditable="true" class="block-header">Insert your header here</h1>`;
+        blockHTML = `<h1 contenteditable="true" style="font-size: 40px" class="block-header">Insert your header here</h1>`;
         break;
       case 'button':
         blockHTML = `<button class="block-button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">Click Here</button>`;

@@ -9,6 +9,18 @@
         tortor enim tellus fermentum.
       </p>
     </header>
+    <div class="column-wrapper">
+      <div class="generate-field">
+        <input class="generate-text" type="text" name="generate-text-field" id="" placeholder="Input Text">
+        <button class="generate-button" (click)="closeSettings()">Generate</button>
+      </div>
+      <!-- Export Area -->
+      <div class="export-area">
+        <button class="export-button" (click)="exportTemplate()">
+          Export as HTML
+        </button>
+      </div>
+    </div>
     <main class="main-content">
       <div class="content-wrapper">
         <!-- Settings Panel -->
@@ -33,7 +45,6 @@
               [(ngModel)]="selectedBlock.styles.padding"
               (input)="updateBlockStyles()"
             />
-
             <label for="text-color">Text Color</label>
             <input
               type="color"
@@ -107,14 +118,8 @@
             (drop)="onDrop($event)"
             (dragover)="allowDrop($event)"
           >
-            <div *ngIf="!hasContent">No content here.</div>
+            <div *ngIf="!hasContent"></div>
           </div>
-        </div>
-        <!-- Export Area -->
-        <div class="export-area">
-          <button class="export-button" (click)="exportTemplate()">
-            Export as HTML
-          </button>
         </div>
       </div>
     </main>
