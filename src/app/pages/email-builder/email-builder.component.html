@@ -1,5 +1,6 @@
 <div class="email-builder-section">
   <div class="container">
+    <!-- Main Email Builder Section -->
     <header class="header">
       <h1 class="title">Email Template Builder</h1>
       <p class="description">
@@ -10,10 +11,28 @@
     </header>
     <main class="main-content">
       <div class="content-wrapper">
+        <!-- Settings Panel -->
+        <div class="settings-panel" [ngClass]="{'open': selectedBlock}" >
+          <h3>Settings</h3>
+          <div *ngIf="selectedBlock">
+            <label for="font-size">Font Size</label>
+            <input type="number" id="font-size" [(ngModel)]="selectedBlock.styles.fontSize" (change)="updateBlockStyles()">
+            
+            <label for="padding">Padding</label>
+            <input type="number" id="padding" [(ngModel)]="selectedBlock.styles.padding" (change)="updateBlockStyles()">
+            
+            <label for="text-color">Text Color</label>
+            <input type="color" id="text-color" [(ngModel)]="selectedBlock.styles.color" (change)="updateBlockStyles()">
+            
+            <label for="background-color">Background Color</label>
+            <input type="color" id="background-color" [(ngModel)]="selectedBlock.styles.backgroundColor" (change)="updateBlockStyles()">
+          </div>
+        </div>
         <div class="sidebar">
           <div class="sidebar-content">
             <nav class="menu">
               <ul class="menu-items">
+                <!-- Existing Blocks Menu -->
                 <li class="menu-item">
                   <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726632980689content.png" alt="Content icon" class="menu-icon" />
                   <span class="menu-text">CONTENT</span>
@@ -30,6 +49,7 @@
             </nav>
 
             <div class="blocks-section">
+              <!-- Blocks to Drag -->
               <div *ngFor="let block of blocks" class="block-wrapper">
                 <img 
                   [src]="block.icon" 
@@ -43,6 +63,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Main Drop Area -->
         <div class="preview-area">
           <div 
             class="preview-placeholder" 
@@ -54,6 +76,7 @@
             </div>
           </div>
         </div>
+        <!-- Export Area -->
         <div class="export-area">
           <button class="export-button" (click)="exportTemplate()">Export as HTML</button>
         </div>

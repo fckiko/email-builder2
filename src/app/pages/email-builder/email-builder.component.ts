@@ -11,6 +11,7 @@ export class EmailBuilderComponent implements OnInit {
 
   title = 'email-builder';
   draggedBlock: any;
+  selectedBlock: any = null;
   hasContent = false; 
 
   blocks = [
@@ -39,16 +40,49 @@ export class EmailBuilderComponent implements OnInit {
   onDrop(event: DragEvent) {
     event.preventDefault();
     if (this.draggedBlock) {
-      this.hasContent = true; 
+      this.hasContent = true;
       const blockType = this.draggedBlock.type;
-      
+
       let blockHTML = this.getBlockHTML(blockType);
 
       const dropArea = this.dropAreaRef.nativeElement;
       dropArea.innerHTML += blockHTML;
       this.draggedBlock = null;
+
+      // Attach click event listener to all blocks to select them
+      this.attachClickEventsToBlocks();
     }
   }
+  attachClickEventsToBlocks() {
+    const dropArea = this.dropAreaRef.nativeElement;
+    const blocks = dropArea.querySelectorAll('.block-text, .block-header, .block-button, .block-divider, .block-image');
+    
+    blocks.forEach((block: HTMLElement) => {
+      block.addEventListener('click', () => {
+        this.selectedBlock = {
+          element: block,
+          styles: {
+            fontSize: window.getComputedStyle(block).fontSize,
+            padding: window.getComputedStyle(block).padding,
+            color: window.getComputedStyle(block).color,
+            backgroundColor: window.getComputedStyle(block).backgroundColor,
+          }
+        };
+      });
+    });
+  }
+
+  updateBlockStyles() {
+    if (this.selectedBlock) {
+      const block = this.selectedBlock.element;
+
+      block.style.fontSize = this.selectedBlock.styles.fontSize;
+      block.style.padding = this.selectedBlock.styles.padding;
+      block.style.color = this.selectedBlock.styles.color;
+      block.style.backgroundColor = this.selectedBlock.styles.backgroundColor;
+    }
+  }
+
 
   getBlockHTML(type: string): string {
     let blockHTML = '';
@@ -101,7 +135,7 @@ export class EmailBuilderComponent implements OnInit {
         const imageSrc = e.target.result;
         const blockHTML = `
           <div class="block-image" style="display: flex; justify-content: center; margin: 10px 0;">
-            <img src="${imageSrc}" style="max-width: 100%; padding: 5px;" alt="Uploaded Image">
+            <img src="${imageSrc}" style="max-width: 600px; padding: 5px;" alt="Uploaded Image">
           </div>`;
         const dropArea = this.dropAreaRef.nativeElement;
         dropArea.innerHTML += blockHTML;
@@ -113,12 +147,12 @@ export class EmailBuilderComponent implements OnInit {
   allowDrop(event: DragEvent) {
     event.preventDefault();
   }
+  
+   /* Export the email template as an HTML file*/
   exportTemplate() {
-    // Get the content of the drop area (the email builder preview)
     const dropArea = this.dropAreaRef.nativeElement;
     const emailHTML = dropArea.innerHTML;
   
-    // Create a full HTML template for the email
     const fullTemplate = `
       <!DOCTYPE html>
       <html lang="en">
@@ -128,6 +162,7 @@ export class EmailBuilderComponent implements OnInit {
         <title>Email Template</title>
         <style>
           body {
+            background-color: grey;
             font-family: Arial, sans-serif;
           }
           .block-text {
@@ -157,12 +192,13 @@ export class EmailBuilderComponent implements OnInit {
         </style>
       </head>
       <body>
+      <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; align-items: center;">
         ${emailHTML}
+      </div>
       </body>
       </html>
     `;
   
-    // Create a blob and initiate download
     const blob = new Blob([fullTemplate], { type: 'text/html' });
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
