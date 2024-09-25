@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailBuilderComponent } from './email-builder.component';
 import { DragDropModule } from 'primeng/dragdrop';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,8 @@ import { DragDropModule } from 'primeng/dragdrop';
   ],
   imports: [
     CommonModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ],
   exports: [
     EmailBuilderComponent

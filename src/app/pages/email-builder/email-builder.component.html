@@ -1,60 +1,127 @@
 <div class="email-builder-section">
-    <div class="container">
-      <header class="header">
-        <h1 class="title">Email Template Builder</h1>
-        <p class="description">
-          Lorem ipsum dolor sit amet consectetur. Dis quis at consectetur
-          pellentesque nisi. Interdum euismod rhoncus consequat in suspendisse
-          tortor enim tellus fermentum.
-        </p>
-      </header>
-      <main class="main-content">
-        <div class="content-wrapper">
-          <div class="sidebar">
-            <div class="sidebar-content">
-              <nav class="menu">
-                <ul class="menu-items">
-                  <li class="menu-item">
-                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726632980689content.png" alt="Content icon" class="menu-icon" />
-                    <span class="menu-text">CONTENT</span>
-                  </li>
-                  <li class="menu-item">
-                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633080222blocks.png" alt="Blocks icon" class="menu-icon" />
-                    <span class="menu-text">BLOCKS</span>
-                  </li>
-                  <li class="menu-item">
-                    <img src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633095861body.png" alt="Body icon" class="menu-icon" />
-                    <span class="menu-text">BODY</span>
-                  </li>
-                </ul>
-              </nav>
-  
-              <div class="blocks-section">
-                <div *ngFor="let block of blocks" class="block-wrapper">
-                  <img 
-                    [src]="block.icon" 
-                    class="block-image" 
-                    pDraggable="{{block.icon}}" 
-                    (onDragStart)="onDragStart($event, block)" 
-                    draggable="true"
-                    alt="Block icon"
-                  />
-                </div>
-              </div>
-            </div>
+  <div class="container">
+    <!-- Main Email Builder Section -->
+    <header class="header">
+      <h1 class="title">Email Template Builder</h1>
+      <p class="description">
+        Lorem ipsum dolor sit amet consectetur. Dis quis at consectetur
+        pellentesque nisi. Interdum euismod rhoncus consequat in suspendisse
+        tortor enim tellus fermentum.
+      </p>
+    </header>
+    <div class="column-wrapper">
+      <div class="generate-field">
+        <input class="generate-text" type="text" name="generate-text-field" id="" placeholder="Input Text">
+        <button class="generate-button" (click)="closeSettings()">Generate</button>
+      </div>
+      <!-- Export Area -->
+      <div class="export-area">
+        <button class="export-button" (click)="exportTemplate()">
+          Export as HTML
+        </button>
+      </div>
+    </div>
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Settings Panel -->
+        <div class="settings-panel" [ngClass]="{ open: selectedBlock }">
+          <!-- Close Button -->
+          <button class="close-button" (click)="closeSettings()">X</button>
+          <h3>Settings</h3>
+          <div *ngIf="selectedBlock">
+            <label for="font-size">Font Size (px)</label>
+            <input
+              type="number"
+              id="font-size"
+              [(ngModel)]="selectedBlock.styles.fontSize"
+              (input)="updateBlockStyles()"
+              min="8"
+              max="100"
+            />
+            <label for="padding">Padding (px)</label>
+            <input
+              type="number"
+              id="padding"
+              [(ngModel)]="selectedBlock.styles.padding"
+              (input)="updateBlockStyles()"
+            />
+            <label for="text-color">Text Color</label>
+            <input
+              type="color"
+              id="text-color"
+              [(ngModel)]="selectedBlock.styles.color"
+              (change)="updateBlockStyles()"
+            />
+            <label for="background-color">Background Color</label>
+            <input
+              type="color"
+              id="background-color"
+              [(ngModel)]="selectedBlock.styles.backgroundColor"
+              (change)="updateBlockStyles()"
+            />
           </div>
-          <div class="preview-area">
-            <div 
-              class="preview-placeholder" 
-              (drop)="onDrop($event)" 
-              (dragover)="allowDrop($event)">
-              <div *ngIf="!hasContent">
-                No content here.
+        </div>
+
+        <div class="sidebar">
+          <div class="sidebar-content">
+            <nav class="menu">
+              <ul class="menu-items">
+                <!-- Existing Blocks Menu -->
+                <li class="menu-item">
+                  <img
+                    src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726632980689content.png"
+                    alt="Content icon"
+                    class="menu-icon"
+                  />
+                  <span class="menu-text">CONTENT</span>
+                </li>
+                <li class="menu-item">
+                  <img
+                    src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633080222blocks.png"
+                    alt="Blocks icon"
+                    class="menu-icon"
+                  />
+                  <span class="menu-text">BLOCKS</span>
+                </li>
+                <li class="menu-item">
+                  <img
+                    src="https://img.jlmconsulting.services/fit-in/51x50/sls_1726633095861body.png"
+                    alt="Body icon"
+                    class="menu-icon"
+                  />
+                  <span class="menu-text">BODY</span>
+                </li>
+              </ul>
+            </nav>
+
+            <div class="blocks-section">
+              <!-- Blocks to Drag -->
+              <div *ngFor="let block of blocks" class="block-wrapper">
+                <img
+                  [src]="block.icon"
+                  class="block-image"
+                  pDraggable="{{ block.icon }}"
+                  (onDragStart)="onDragStart($event, block)"
+                  draggable="true"
+                  alt="Block icon"
+                />
               </div>
             </div>
           </div>
         </div>
-      </main>
-    </div>
+
+        <!-- Main Drop Area -->
+        <div class="preview-area">
+          <div
+            class="preview-placeholder"
+            #dropArea
+            (drop)="onDrop($event)"
+            (dragover)="allowDrop($event)"
+          >
+            <div *ngIf="!hasContent"></div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
-  
+</div>
